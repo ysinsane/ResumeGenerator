@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Web App</title>
+    <style>
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,0.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #submit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+    </style>
+    <script>
+        function showLoading() {
+            var button = document.getElementById("submit-button");
+            var spinner = document.getElementById("loading-spinner");
+            
+            // Disable button
+            button.disabled = true;
+            
+            // Show spinner
+            spinner.style.display = 'inline-block';
+            
+            // Optional: Prevent multiple submissions
+            setTimeout(() => {
+                if (spinner.style.display === 'inline-block') {
+                    button.disabled = false;
+                    spinner.style.display = 'none';
+                }
+            }, 30000); // Timeout after 30 seconds
+        }
+    </script>
+</head>
+<body>
+    <h1>Input Form</h1>
+    <form method="POST" onsubmit="showLoading()">
+        <label for="jd_url">Input:</label>
+        <input type="text" id="jd_url" name="jd_url" required><br><br>
+        
+        <label for="user_textarea">Textarea:</label><br>
+        <textarea id="user_textarea" name="user_textarea" rows="4" cols="50" required></textarea><br><br>
+        
+        <button type="submit" id="submit-button">
+            Submit
+            <div id="loading-spinner" class="spinner" style="display: none;"></div>
+        </button>
+    </form>
+</body>
+</html>
