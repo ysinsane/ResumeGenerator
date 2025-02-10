@@ -1,7 +1,7 @@
 import os
 import subprocess
 from flask import Flask, render_template, request, send_file
-from resume_dummy import extract_job_description, generate_resume
+from resume_gen_gemini import extract_job_description, generate_resume
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
